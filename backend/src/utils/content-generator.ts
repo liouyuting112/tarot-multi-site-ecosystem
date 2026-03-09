@@ -66,19 +66,26 @@ export async function generateRandomArticle(siteId: 'SiteA' | 'SiteB' | 'SiteC',
     const title = template.titles[Math.floor(Math.random() * template.titles.length)].replace('{card}', card.name);
     const intro = template.intros[Math.floor(Math.random() * template.intros.length)].replace('{card}', card.name);
 
-    // Simulating deep content generation
-    const content = `${intro}\n\n這張牌在這一刻的出現，代表著一種深層的聯繫。透過對其牌面符號的進一步剖析，我們可以看到：\n\n1. 基於其「${card.keywords[0]}」的特性，這是一個轉變的起點。\n2. 在目前的大環境下，${card.name} 提醒我們注意內在的平衡。\n3. 最重要的是，其對應的${card.meaningUpright?.slice(0, 50)}... 為我們提供了具體的行動指引。\n\n不論您目前的處境如何，請記住命運始終握在您的覺察之中。`;
+    // Site-Specific Tone & Structure (Anti-PBN Hardening)
+    let bodyText = "";
+    if (siteId === 'SiteA') {
+        bodyText = `[系統診斷]\n主體：${card.name}\n關鍵特徵：${card.keywords.join('; ')}\n\n深度分析：該牌組顯示出強大的邏輯偏向。在運算過程中，我們發現 ${card.meaningUpright} 的機率權重顯著上升。推薦執行路徑：${card.meaningUpright.slice(0, 100)}... [END OF REPORT]`;
+    } else if (siteId === 'SiteB') {
+        bodyText = `${intro}\n\n親愛的，看到這張 ${card.name}，你是否感受到一股暖流？它在提醒你「${card.keywords[0]}」的重要性。目前的你，只需放慢腳步，傾聽內心的聲音：${card.meaningUpright.slice(0, 150)}。讓我們一起擁抱這份平靜吧。✨`;
+    } else {
+        bodyText = `在密契主義的歷史長河中，${card.name} 被視為開啟「${card.keywords[0]}」之鑰。從大阿爾克那的符號學角度觀之，其位格與 ${card.meaningUpright} 的古老智慧相呼應。正如古語所云：${card.meaningUpright.slice(0, 120)}。這是靈魂深刻的轉化之視。`;
+    }
 
     const faq = template.faq_questions.slice(0, 5).map(q => ({
         q: q.replace('{card}', card.name),
-        a: `基於 ${card.name} 的能量與「${card.keywords.join('、')}」的屬性，我們建議您... (自動生成的深度解答)。`
+        a: `${siteId === 'SiteA' ? '[DATA_ANSWER] ' : ''}針對 ${card.name}，這代表了 ${card.meaningUpright?.slice(0, 80)}... 這是來自 ${siteId === 'SiteC' ? '神聖秘典' : '當前分析'} 的回饋。`
     }));
 
     return {
         title,
         slug: `${siteId.toLowerCase()}-${card.nameEn.toLowerCase().replace(/\s+/g, '-')}-${Date.now()}`,
-        content,
-        excerpt: `${card.name} 的深度解析日誌。`,
+        content: bodyText,
+        excerpt: `${card.name} 的高度差異化解析。`,
         target_site: siteId,
         faq_schema: faq,
         publishedAt: new Date()

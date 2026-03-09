@@ -1,0 +1,29 @@
+{
+    "kind": "collectionType",
+    "collectionName": "site_configs",
+    "info": {
+        "singularName": "site-config",
+        "pluralName": "site-configs",
+        "displayName": "Site Config",
+        "description": "Global settings"
+    },
+    "options": {
+        "draftAndPublish": false
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "site_id": {
+            "type": "string",
+            "required": true
+        },
+        "seo_default_title": {
+            "type": "string"
+        },
+        "seo_default_desc": {
+            "type": "text"
+        },
+        "google_analytics_id": {
+            "type": "string"
+        }
+    }
+}

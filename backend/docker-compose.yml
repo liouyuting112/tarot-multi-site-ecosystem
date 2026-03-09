@@ -1,0 +1,67 @@
+services:
+  strapi:
+    container_name: strapi
+    build:
+      context: ./backend
+    image: strapi:latest
+    restart: always
+    env_file: ./backend/.env
+    environment:
+      DATABASE_CLIENT: ${DATABASE_CLIENT}
+      DATABASE_FILENAME: ${DATABASE_FILENAME}
+      NODE_ENV: production
+      STRAPI_URL: http://strapi:1337
+    volumes:
+      - ./backend/config:/opt/app/config
+      - ./backend/src:/opt/app/src
+      - ./backend/.tmp:/opt/app/.tmp
+      - ./backend/public/uploads:/opt/app/public/uploads
+    ports:
+      - "1337:1337"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:1337/_health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  site-a:
+    container_name: site-a-tech
+    build:
+      context: ./site-a-tech
+    restart: always
+    environment:
+      NEXT_PUBLIC_STRAPI_URL: http://strapi:1337
+      REVALIDATION_SECRET: ${REVALIDATION_SECRET}
+    ports:
+      - "3000:3000"
+    depends_on:
+      strapi:
+        condition: service_healthy
+
+  site-b:
+    container_name: site-b-modern
+    build:
+      context: ./site-b-modern
+    restart: always
+    environment:
+      NEXT_PUBLIC_STRAPI_URL: http://strapi:1337
+      REVALIDATION_SECRET: ${REVALIDATION_SECRET}
+    ports:
+      - "3001:3000"
+    depends_on:
+      strapi:
+        condition: service_healthy
+
+  site-c:
+    container_name: site-c-arcane
+    build:
+      context: ./site-c-arcane
+    restart: always
+    environment:
+      NEXT_PUBLIC_STRAPI_URL: http://strapi:1337
+      REVALIDATION_SECRET: ${REVALIDATION_SECRET}
+    ports:
+      - "3002:3000"
+    depends_on:
+      strapi:
+        condition: service_healthy

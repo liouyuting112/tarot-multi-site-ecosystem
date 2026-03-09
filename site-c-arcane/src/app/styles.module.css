@@ -1,0 +1,80 @@
+.body {
+    background-color: #0c0c0c;
+    color: #d1b894;
+    font-family: 'Times New Roman', serif;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.title {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #e0cca7;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    text-align: center;
+    border-bottom: 2px solid #2a2216;
+    padding-bottom: 2rem;
+    margin-bottom: 4rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 3rem;
+}
+
+.mainContent {
+    grid-column: span 8;
+}
+
+.sidebar {
+    grid-column: span 4;
+    border-left: 1px solid #2a2216;
+    padding-left: 3rem;
+}
+
+.article {
+    margin-bottom: 5rem;
+}
+
+.articleImage {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    filter: sepia(30%) contrast(110%);
+    border: 1px solid #2a2216;
+    margin-bottom: 1.5rem;
+}
+
+.articleTitle {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #e0cca7;
+}
+
+.sidebarTitle {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 2rem;
+    color: #8b7355;
+}
+
+.link {
+    color: #d1b894;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.link:hover {
+    color: #fff;
+}

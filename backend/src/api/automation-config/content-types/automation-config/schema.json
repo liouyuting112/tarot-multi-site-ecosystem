@@ -1,0 +1,45 @@
+{
+    "kind": "singleType",
+    "collectionName": "automation_configs",
+    "info": {
+        "singularName": "automation-config",
+        "pluralName": "automation-configs",
+        "displayName": "Automation Config",
+        "description": "Daily automated posting settings"
+    },
+    "options": {
+        "draftAndPublish": false
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "start_hour": {
+            "type": "integer",
+            "default": 9,
+            "min": 0,
+            "max": 23
+        },
+        "end_hour": {
+            "type": "integer",
+            "default": 18,
+            "min": 0,
+            "max": 23
+        },
+        "min_daily_articles": {
+            "type": "integer",
+            "default": 1
+        },
+        "max_daily_articles": {
+            "type": "integer",
+            "default": 3
+        },
+        "last_reset_date": {
+            "type": "string"
+        },
+        "daily_target_counts": {
+            "type": "json"
+        },
+        "daily_progress": {
+            "type": "json"
+        }
+    }
+}

@@ -1,0 +1,40 @@
+{
+    "kind": "collectionType",
+    "collectionName": "ad_banners",
+    "info": {
+        "singularName": "ad-banner",
+        "pluralName": "ad-banners",
+        "displayName": "Ad Banner",
+        "description": "Ad banners config"
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "ad_name": {
+            "type": "string",
+            "required": true
+        },
+        "image_url": {
+            "type": "string",
+            "required": true
+        },
+        "link_url": {
+            "type": "string"
+        },
+        "position": {
+            "type": "enumeration",
+            "enum": [
+                "Top",
+                "Sidebar",
+                "Bottom",
+                "ArticleMiddle"
+            ]
+        },
+        "active": {
+            "type": "boolean",
+            "default": true
+        }
+    }
+}
